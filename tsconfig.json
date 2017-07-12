@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "allowJs": true,                        // Allows for JavaScript files to be referenced by TypeScript
+    "sourceMap": true,
+    "noImplicitAny": true,                  // Enforce :any, don't infer it
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,   // ES6 import syntax for npm modules without a default export
+    "experimentalDecorators": true,
+    "moduleResolution": "node",             // load type declarations supplied alongside npm packages
+    "module": "es6",                        // keep our modules es6
+    "target": "es6",                        // don't transpile to es5
+    "jsx": "preserve"                       // leave JSX as-is, let Babel deal with it
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "buildOnSave": false,
+  "compileOnSave": false,
+  "typeRoots": [
+     "node_modules/@types"
+  ]
+}
