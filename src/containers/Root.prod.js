@@ -5,7 +5,7 @@ import Routes from '../routes';
 /**
  * Component is exported for conditional usage in Root.js
  */
-module.exports = class Root extends Component {
+class Root extends Component {
   render() {
     const { store, history } = this.props;
     return (
@@ -19,4 +19,11 @@ module.exports = class Root extends Component {
       </Provider>
     );
   }
+}
+
+Root.propTypes = {
+  store: React.PropTypes.object,
+  history: React.PropTypes.object,
 };
+
+module.exports = Root;

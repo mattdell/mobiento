@@ -1,7 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+if (!process.env.NODE_ENV) {
+  throw new Error('NODE_ENV is not defined');
+  exit(1); // eslint-disable-line
+}
+
+const configuration = {
   devtool: 'cheap-module-eval-source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -13,7 +19,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/'
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
@@ -44,3 +50,15 @@ module.exports = {
     ]
   }
 };
+
+// Environment specific configuration
+const { NODE_ENV: environment } = process.env;
+if (environment === 'production') {
+  configuration.plugins.push(
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    })
+  );
+}
+
+module.exports = configuration;
