@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 export class App extends Component {
   render() {
     // we can use ES6's object destructuring to effectively 'unpack' our props
-    const { counter, actions, children} = this.props;
+    const { counter, actions, children } = this.props;
     return (
       <div className="main-app-container">
         <div className="main-app-nav">
@@ -28,9 +28,11 @@ export class App extends Component {
             {/* Here's a trick: we pass those props into the children by mapping
               and cloning the element, followed by passing props in. Notice that
               those props have been unpacked above! */}
-            {React.Children.map(children, (child) => {
-              return React.cloneElement(child, { counter, actions });
-            })}
+            {
+              React.Children.map(children, (child) => (
+                React.cloneElement(child, { counter, actions })
+              ))
+            }
           </div>
           <Footer />
       </div>
