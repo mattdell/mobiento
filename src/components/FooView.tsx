@@ -7,8 +7,8 @@ export default function FooView() {
     <Counter
       counter={5}
       actions={{
-        increment: () => alert('increment'),
-        decrement: () => alert('decrement')
+        increment: () => null,
+        decrement: () => null,
       }}
     />
   );

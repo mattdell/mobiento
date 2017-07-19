@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,                        // Allows for JavaScript files to be referenced by TypeScript
+    "allowJs": false,                        // Allows for JavaScript files to be referenced by TypeScript
     "sourceMap": true,
     "noImplicitAny": true,                  // Enforce :any, don't infer it
     "strictNullChecks": false,

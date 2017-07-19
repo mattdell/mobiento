@@ -11,10 +11,6 @@ interface IProps {
 interface IState {}
 
 export default class Counter extends Component<IProps, IState> {
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
-
   handleIncrement() {
     this.props.actions.increment();
   }
@@ -33,8 +29,8 @@ export default class Counter extends Component<IProps, IState> {
         <div className="counter-even-label">{this.props.counter % 2 === 0 ? 'even' : 'odd'}</div>
         <br />
         <div className="counter-buttons">
-          <button onClick={() => {this.handleDecrement();}}>-</button>
-          <button onClick={() => {this.handleIncrement();}}>+</button>
+          <button onClick={() => { this.handleDecrement(); }}>-</button>
+          <button onClick={() => { this.handleIncrement(); }}>+</button>
         </div>
       </div>
     );
