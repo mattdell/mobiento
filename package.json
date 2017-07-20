@@ -10,7 +10,7 @@
     "deploy:production": "npm run build && surge --project ./dist --domain mattdell-mobiento.surge.sh",
     "lint": "eslint src --ext js,jsx,ts,tsx",
     "lint:fix": "npm run lint -- --fix",
-    "start": "NODE_ENV=development webpack-dev-server --hot --inline --port 3000 --colors --no-info",
+    "start": "NODE_ENV=development webpack-dev-server --hot --inline --port 3000 --colors",
     "test": "echo \"Warning: no tests specified\" && exit 0"
   },
   "repository": {
