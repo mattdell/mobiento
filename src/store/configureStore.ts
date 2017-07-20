@@ -1,19 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from '../reducers';
+import rootReducer, { IGlobalState } from '../reducers';
 
 const createLogger = require('redux-logger');
 
-export interface IGlobalState {
-  counter: number;
-}
+const { NODE_ENV } = process.env;
 
 function configureStore(initialState?: IGlobalState) {
-  const middlewares = [
-    createLogger(),
-  ];
+  const middleware = [];
+
+  if (NODE_ENV === 'development') {
+    middleware.push(createLogger());
+  }
 
   const enhancer = compose(
-    applyMiddleware(...middlewares),
+    applyMiddleware(...middleware),
   );
 
   return createStore<IGlobalState>(

@@ -9,6 +9,7 @@
     "import/extensions": 0,
     "no-unused-vars": 0,
     "no-undef": 0,
-    "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }]
+    "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }],
+    "space-infix-ops": 0
   }
 }
