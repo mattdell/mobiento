@@ -1,7 +1,7 @@
 import React from 'react';
 
-import IndexContainer from '../../containers/SearchContainer';
+import SearchContainer from '../../containers/SearchContainer';
 
 export default () => (
-  <IndexContainer />
+  <SearchContainer />
 );

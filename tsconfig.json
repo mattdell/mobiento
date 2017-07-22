@@ -23,5 +23,9 @@
   "compileOnSave": false,
   "typeRoots": [
      "node_modules/@types"
+  ],
+  "types": [
+    "mocha",
+    "chai"
   ]
 }

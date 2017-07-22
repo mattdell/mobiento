@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Router from './routes';
+import configureStore from './store/configureStore';
 
 import './styles/main.scss';
-
-import configureStore from './store/configureStore';
-import Router from './routes';
 
 const store = configureStore();
 
