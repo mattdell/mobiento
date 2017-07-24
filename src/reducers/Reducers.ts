@@ -1,5 +1,5 @@
 import { combineReducers, Reducer } from 'redux';
-import { reducer as search, IState as ISearchState } from '../ducks/SearchDucks';
+import { reducer as search, ISearchState } from '../ducks/SearchDucks';
 
 export interface IGlobalState {
   search: ISearchState

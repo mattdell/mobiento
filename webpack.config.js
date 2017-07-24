@@ -1,14 +1,26 @@
+require('dotenv').config();
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-if (!process.env.NODE_ENV) {
-  throw new Error('NODE_ENV is not defined');
-  exit(1); // eslint-disable-line
-}
+const requiredEnvironmentVariables = [
+  'NODE_ENV',
+  'UNSPLASH_CLIENT_ID',
+];
+
+requiredEnvironmentVariables.forEach((variable) => {
+  if (!process.env[variable]) {
+    console.error(`Required environment variable ${variable} not found`);
+    process.exit(1);
+  }
+});
 
 const configuration = {
   devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    stats: 'errors-only',
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
@@ -24,7 +36,8 @@ const configuration = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.UNSPLASH_CLIENT_ID': JSON.stringify(process.env.UNSPLASH_CLIENT_ID),
     }),
   ],
   module: {
@@ -56,7 +69,7 @@ const { NODE_ENV: environment } = process.env;
 if (environment === 'production') {
   configuration.plugins.push(
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.html',
     })
   );
 }

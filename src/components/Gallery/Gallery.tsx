@@ -1,16 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import { IUnsplashApiImageSearchResponse } from '../../utils/ApiUtils.interfaces';
 
 interface IProps {
-  counter: number;
-  actions: {
-    increment: () => void;
-    decrement: () => void;
-  };
+  data: IUnsplashApiImageSearchResponse;
 }
 
-const Gallery = () => (
-  <div className="counter-container">
-    Pretty pictures go here
+const Gallery = ({ data }: IProps) => (
+  <div>
+    {
+      data && data.results.map(result => (
+        <img
+          alt={result.description}
+          key={result.id}
+          src={result.urls.small}
+        />
+      ))
+    }
   </div>
 );
 
