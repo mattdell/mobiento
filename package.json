@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development webpack-dev-server --hot --inline --port 3000 --colors",
     "lint": "eslint src --ext js,jsx,ts,tsx",
     "lint:fix": "npm run lint -- --fix",
-    "start": "npm run build && NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node server.js",
     "test": "npm run test:dev -- --single-run",
     "test:dev": "NODE_ENV=test karma start"
   },
