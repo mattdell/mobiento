@@ -17,9 +17,9 @@ test:
 deployment:
   staging:
     branch: develop
-    commands:
-      - yarn run deploy:staging
+    heroku:
+      appname: mattdell-mobiento-staging
   production:
     branch: master
-    commands:
-      - yarn run deploy:production
+    heroku:
+      appname: mattdell-mobiento
