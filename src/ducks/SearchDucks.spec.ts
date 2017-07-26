@@ -5,15 +5,17 @@ import { shallow } from 'enzyme';
 import {
   reducer,
   ISearchState,
-  SEARCH_TERM_CHANGED,
-  SEARCH_RESULTS_UPDATED,
   IChangeSearchTermPayload,
   IUpdateSearchResultsPayload,
+  SEARCH_TERM_CHANGED,
+  SEARCH_RESULTS_ADDED,
+  SEARCH_RESULTS_UPDATED,
   changeSearchTerm,
+  addSearchResults,
   updateSearchResults,
 } from './SearchDucks';
 import { Action } from '../reducers';
-import { IUnsplashApiImageSearchResponse } from '../utils/ApiUtils.interfaces';
+import { IUnsplashApiImageSearchResponseResultItem, IUnsplashApiImageSearchResponse } from '../utils/ApiUtils.interfaces';
 
 const searchResponse: IUnsplashApiImageSearchResponse = {
   results: [{
@@ -27,6 +29,8 @@ const searchResponse: IUnsplashApiImageSearchResponse = {
       thumb: 'https://images.unsplash.com/photo-1467646835273-19bc88c4dffb?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=c296f63b3195bf5a6b7423147bf8b7ef',
     },
   }],
+  total: 1,
+  total_pages: 2,
 };
 
 describe('SearchDucks', () => {
@@ -41,12 +45,25 @@ describe('SearchDucks', () => {
       });
     });
 
+    it('should create an action for SEARCH_RESULTS_ADDED', () => {
+      const action: Action<IUpdateSearchResultsPayload> = addSearchResults(searchResponse);
+      expect(action).to.deep.equal({
+        type: SEARCH_RESULTS_ADDED,
+        payload: {
+          results: searchResponse.results,
+          totalPages: 2,
+        },
+      });
+    });
+
     it('should create an action for SEARCH_RESULTS_UPDATED', () => {
-      const action: Action<IUpdateSearchResultsPayload> = updateSearchResults(searchResponse);
+      const action: Action<IUpdateSearchResultsPayload> = updateSearchResults(searchResponse, 2);
       expect(action).to.deep.equal({
         type: SEARCH_RESULTS_UPDATED,
         payload: {
-          results: searchResponse,
+          results: searchResponse.results,
+          pageNumber: 2,
+          totalPages: 2,
         },
       });
     });
@@ -57,6 +74,8 @@ describe('SearchDucks', () => {
       const initialState: ISearchState = {
         searchTerm: '',
         results: {},
+        pageNumber: 0,
+        totalPages: 0,
       };
 
       const action: Action<IChangeSearchTermPayload> = {
@@ -64,26 +83,62 @@ describe('SearchDucks', () => {
         payload: { searchTerm: 'foo' },
       };
 
-
       const newState = reducer(initialState, action);
-      expect(newState).to.deep.equal({ searchTerm: 'foo', results: {} });
+      expect(newState).to.deep.equal({
+        searchTerm: 'foo',
+        results: {},
+        pageNumber: 0,
+        totalPages: 0,
+      });
     });
 
-    it('should update the state when the search result changes', () => {
+    it('should update the state when the search result is added', () => {
       const initialState: ISearchState = {
         searchTerm: '',
         results: {},
+        pageNumber: 0,
+        totalPages: 0,
+      };
+
+      const action: Action<IUpdateSearchResultsPayload> = {
+        type: SEARCH_RESULTS_ADDED,
+        payload: {
+          results: searchResponse.results,
+        },
+      };
+
+      const newState = reducer(initialState, action);
+      expect(newState).to.deep.equal({
+        searchTerm: '',
+        results: searchResponse.results,
+        pageNumber: 1,
+        totalPages: 0,
+      });
+    });
+
+    it('should update the state when the search result is updated with the next page', () => {
+      const initialState: ISearchState = {
+        searchTerm: '',
+        results: searchResponse.results,
+        pageNumber: 1,
+        totalPages: 0,
       };
 
       const action: Action<IUpdateSearchResultsPayload> = {
         type: SEARCH_RESULTS_UPDATED,
         payload: {
-          results: searchResponse,
+          results: searchResponse.results,
+          pageNumber: 2,
         },
       };
 
       const newState = reducer(initialState, action);
-      expect(newState).to.deep.equal({ searchTerm: '', results: searchResponse });
+      expect(newState).to.deep.equal({
+        searchTerm: '',
+        results: searchResponse.results.concat(searchResponse.results),
+        pageNumber: 2,
+        totalPages: 0,
+      });
     });
   });
 });

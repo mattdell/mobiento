@@ -1,22 +1,29 @@
 import React, { Component, PropTypes } from 'react';
-import { IUnsplashApiImageSearchResponse } from '../../utils/ApiUtils.interfaces';
+import { IUnsplashApiImageSearchResponseResultItem } from '../../utils/ApiUtils.interfaces';
 
 interface IProps {
-  data: IUnsplashApiImageSearchResponse;
+  data: IUnsplashApiImageSearchResponseResultItem[];
 }
 
+const styles = require('./Gallery.scss');
+
 const Gallery = ({ data }: IProps) => (
-  <div>
-    {
-      data && data.results.map(result => (
-        <img
-          alt={result.description}
-          key={result.id}
-          src={result.urls.small}
-        />
-      ))
-    }
-  </div>
+  data && (
+    <div>
+      <div className={styles.gallery}>
+        {
+          data.map(result => (
+            <figure key={result.id}>
+              <img
+                alt={result.description}
+                src={result.urls.small}
+              />
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  )
 );
 
 export default Gallery;

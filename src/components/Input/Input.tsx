@@ -15,14 +15,13 @@ const Input = ({
   type,
   value,
 }: IProps) => (
-  <div>
-    <input
-      onBlur={onBlur}
-      onChange={onChange}
-      type={type || 'text'}
-      value={value}
-    />
-  </div>
+  <input
+    className={styles.input}
+    onBlur={onBlur}
+    onChange={onChange}
+    type={type || 'text'}
+    value={value}
+  />
 );
 
 export default Input;

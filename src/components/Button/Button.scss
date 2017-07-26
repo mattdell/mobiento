@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.button {
+  background-color: $accent-blue;
+  border-color: $accent-blue;
+  border-style: solid;
+  border-width: 1px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  height: 32px;
+  line-height: 32px;
+  overflow: hidden;
+  padding: 0 48px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
