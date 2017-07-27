@@ -22,7 +22,7 @@ If you don't use [Yarn](https://yarnpkg.com/lang/en/docs/install/) simply substi
 
 ## Environments
 
-There are two deployment environments for this project, based on the branches `master` and `develop`.
+There are two deployment environments for this project, based on the branches `master` and `develop`. When either branch receives a commit, [Circle CI](https://circleci.com/gh/mattdell/mobiento) will automatically build and deploy the the URLs below.
 
 | branch  	| url                                             	|
 |---------	|-------------------------------------------------	|
