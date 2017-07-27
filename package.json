@@ -7,8 +7,11 @@
     "build": "npm run clean && npm run build:webpack",
     "build:webpack": "NODE_ENV=production webpack -p",
     "dev": "NODE_ENV=development webpack-dev-server --hot --inline --port 3000 --colors",
-    "lint": "eslint src --ext js,jsx,ts,tsx",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "npm run eslint && npm run stylelint",
+    "lint:fix": "npm run eslint:fix && npm run stylelint",
+    "eslint": "eslint src --ext js,jsx,ts,tsx",
+    "eslint:fix": "npm run lint -- --fix",
+    "stylelint": "stylelint src/**/*.scss",
     "start": "npm run build && NODE_ENV=production node server.js",
     "test": "npm run test:dev -- --single-run",
     "test:dev": "NODE_ENV=test karma start"
@@ -45,6 +48,8 @@
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.2",
     "sinon": "^2.3.8",
+    "stylelint": "^8.0.0",
+    "stylelint-config-standard": "^17.0.0",
     "typescript-eslint-parser": "^4.0.0"
   },
   "dependencies": {
@@ -67,8 +72,8 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.0.0",
     "css-loader": "^0.23.1",
-    "eventsource-polyfill": "^0.9.6",
     "dotenv": "^4.0.0",
+    "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.3",
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.29.0",

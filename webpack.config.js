@@ -17,7 +17,6 @@ requiredEnvironmentVariables.forEach((variable) => {
 });
 
 const configuration = {
-  devtool: 'cheap-module-eval-source-map',
   devServer: {
     stats: 'errors-only',
   },
@@ -36,7 +35,8 @@ const configuration = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.PORT': JSON.stringify(process.env.PORT),
       'process.env.UNSPLASH_CLIENT_ID': JSON.stringify(process.env.UNSPLASH_CLIENT_ID),
     }),
   ],
@@ -68,10 +68,17 @@ const configuration = {
 const { NODE_ENV: environment } = process.env;
 if (environment === 'production') {
   configuration.plugins.push(
+    new webpack.optimize.UglifyJsPlugin()
+  );
+  configuration.plugins.push(
     new HtmlWebpackPlugin({
       template: './index.html',
     })
   );
+}
+
+if (environment === 'development') {
+  configuration.devtool = 'source-map';
 }
 
 module.exports = configuration;
