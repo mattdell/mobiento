@@ -19,3 +19,12 @@ npm start                     # Compile and launch
 ```
 
 If you don't use [Yarn](https://yarnpkg.com/lang/en/docs/install/) simply substitute `yarn` with `npm install`.
+
+## Environments
+
+There are two deployment environments for this project, based on the branches `master` and `develop`.
+
+| branch  	| url                                             	|
+|---------	|-------------------------------------------------	|
+| master  	| https://mattdell-mobiento.herokuapp.com         	|
+| develop 	| https://mattdell-mobiento-staging.herokuapp.com 	|
